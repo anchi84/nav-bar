@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Item from '../item/item'
 
 class Menu extends Component {
     
@@ -26,15 +27,15 @@ class Menu extends Component {
 
         return (
             <div className="navBar">
-            {
-                (this.state.language === 'Hrvatski') ?
-                    hr.map((item, index) => 
-                        <p key={index}>{item}</p>
-                    ) : 
-                    en.map((item, index) => 
-                        <p key={index}>{item}</p>
-                    )
-            }
+                {
+                    (this.state.language === 'Hrvatski') ?
+                        hr.map((item, index) => 
+                            <Item key={index} item={item}/>
+                        ) : 
+                        en.map((item, index) => 
+                            <Item key={index} item={item}/>
+                        )
+                }
                 <select onChange = {this.handleChange}>
                     <option defaultValue>Hrvatski</option>
                     <option>English</option>
