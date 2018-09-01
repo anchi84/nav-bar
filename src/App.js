@@ -31,9 +31,7 @@ class App extends Component {
     };
 
     return (
-      <div>
-        <Menu menuItems={menuItems}/>
-      </div>
+      <Menu menuItems={menuItems}/>
     );
   }
 }

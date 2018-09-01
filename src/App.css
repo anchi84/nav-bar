@@ -1,7 +1,12 @@
 .navBar {
-  text-align: center;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .item {
   padding: 10px;
+  border: 1px solid black;
 }

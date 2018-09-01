@@ -26,7 +26,8 @@ class Menu extends Component {
         //console.log(hr);
 
         return (
-            <div className="navBar">
+            <div>
+                <div className="navBar">
                 {
                     (this.state.language === 'Hrvatski') ?
                         hr.map((item, index) => 
@@ -36,11 +37,13 @@ class Menu extends Component {
                             <Item key={index} item={item}/>
                         )
                 }
+                </div>
                 <select onChange = {this.handleChange}>
                     <option defaultValue>Hrvatski</option>
                     <option>English</option>
                 </select>
             </div>
+            
         );
     }
 }
