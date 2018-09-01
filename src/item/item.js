@@ -4,9 +4,9 @@ class Item extends Component {
     
     render() {
         const item = this.props.item;
-        console.log(item);
+        // console.log(item);
         var words = item.split(' ');
-        console.log(words);
+        // console.log(words);
         return (
             <div className='item'>
                 {

@@ -6,41 +6,38 @@ class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            language: 'Hrvatski'
+            id: 'hr'
         };
     }
 
     handleChange = (event) => {
-        (this.state.language === 'Hrvatski') ?
-        this.setState({language: 'English'}) : this.setState({language: 'Hrvatski'}); 
+        console.log(event.target.value)
+        this.setState({id: event.target.value}); 
     }
 
     render() {
 
         const {
-            hr,
-            en
-        } = this.props.menuItems;
+            languages
+        } = this.props;
 
-        //console.log(en);
-        //console.log(hr);
+        console.log(languages);
 
         return (
             <div>
                 <div className="navBar">
                 {
-                    (this.state.language === 'Hrvatski') ?
-                        hr.map((item, index) => 
-                            <Item key={index} item={item}/>
-                        ) : 
-                        en.map((item, index) => 
-                            <Item key={index} item={item}/>
-                        )
+                    this.props.menuItems[this.state.id].map((item, index) => 
+                        <Item key={index} item={item}/>
+                    ) 
                 }
                 </div>
                 <select onChange = {this.handleChange}>
-                    <option defaultValue>Hrvatski</option>
-                    <option>English</option>
+                    {
+                        Object.entries(languages).map(
+                            ([id, language]) => (<option key={id} value={id}>{language}</option>)
+                        )
+                    }
                 </select>
             </div>
             

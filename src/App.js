@@ -30,8 +30,13 @@ class App extends Component {
       ]
     };
 
+    const languages = {
+      hr: 'Hrvatski',
+      en: 'English'
+    }
+
     return (
-      <Menu menuItems={menuItems}/>
+      <Menu menuItems={menuItems} languages={languages}/>
     );
   }
 }
