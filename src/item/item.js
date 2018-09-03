@@ -10,10 +10,9 @@ class Item extends Component {
         return (
             <div className='item'>
                 {
-                    words.map((word, index) => (word.length >= 3) ?
-                        <span key={index}>{word}<br/></span>
-                        :
-                        <span key={index}>{word} </span>
+                    words.map((word, index) => (word.length >= 3) 
+                    ? <span key={index}>{word}<br/></span>
+                    : <span key={index}>{word} </span>
                     )
                 }
             </div>

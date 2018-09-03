@@ -1,12 +1,25 @@
 .navBar {
   background-color: white;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
+  vertical-align: middle;
 }
 
 .item {
+  height: 4em;
   padding: 10px;
   border: 1px solid black;
+  /* flex-grow: 1; */
+}
+
+.dropdown {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.select {
+  border-radius: 3px;
 }
