@@ -15,7 +15,7 @@ class Item extends Component {
 
     getWidth = () => { 
         return this.childNode.offsetWidth;
-     } 
+    } 
     
     render() {
         const item = this.props.item;

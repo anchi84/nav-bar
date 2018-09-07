@@ -53,7 +53,10 @@ class Menu extends Component {
                         this.props.menuItems[this.state.id]
                             .slice(0,8)
                             .map((item, index) => 
-                                <Item key={this.state.id + "_" + index} item={item} ref={(r) => {this.itemComponent[index] = r}}/>
+                                <Item key={this.state.id + "_" + index} 
+                                    item={item} 
+                                    ref={(r) => {this.itemComponent[index] = r}}
+                                />
                             )
                     }
                    {/*  <div className="dropdown" 
