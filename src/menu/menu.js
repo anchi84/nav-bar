@@ -53,7 +53,8 @@ class Menu extends Component {
                         this.props.menuItems[this.state.id]
                             .slice(0,8)
                             .map((item, index) => 
-                                <Item key={this.state.id + "_" + index} 
+                                <Item 
+                                    key={this.state.id + "_" + index} 
                                     item={item} 
                                     ref={(r) => {this.itemComponent[index] = r}}
                                 />
@@ -75,7 +76,8 @@ class Menu extends Component {
                     </div> */}
                     <select className="select" onChange={this.handleChange}>
                         {
-                            Object.entries(languages)
+                            Object
+                                .entries(languages)
                                 .map(([id, language]) => 
                                     (<option key={id} value={id}>{language}</option>)
                                 )
