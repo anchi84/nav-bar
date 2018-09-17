@@ -10,20 +10,22 @@ class Item extends Component {
     }
 
     componentDidMount() {
-        this.setState({width: this.childNode.offsetWidth})
+        console.log("item componentDidMount")
+        this.setState({width: this.item.offsetWidth})
     }
 
     getWidth = () => { 
-        return this.childNode.offsetWidth;
+        return this.item.offsetWidth;
     } 
     
     render() {
+        console.log("item render");
         const item = this.props.item;
         // console.log(item);
         var words = item.split(' ');
         // console.log(words);
         return (
-            <div className='item' ref={(r) => {this.childNode = r}}>
+            <div className='item' ref={(r) => {this.item = r}}>
                 {
                     words.map((word, index) => (word.length >= 3) 
                     ? <span key={index}>{word}<br/></span>

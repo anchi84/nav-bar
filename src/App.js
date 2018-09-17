@@ -5,32 +5,8 @@ import Menu from '../src/menu/menu'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      height: window.innerHeight, 
-      width: window.innerWidth
-    };
-  }
-
-  componentDidMount() {
-    // console.log(this.state.height);
-    // console.log(this.state.width);
-    window.addEventListener("resize", this.updateDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
-
-  updateDimensions = () => {
-    this.setState({
-      height: window.innerHeight,
-      width: window.innerWidth
-    });
-  }
-  
   render() {
+    console.log("app render")
 
     const menuItems = {
       hr: [
@@ -61,7 +37,10 @@ class App extends Component {
     }
 
     return (
-      <Menu menuItems={menuItems} languages={languages}/>
+      <Menu 
+        menuItems={menuItems} 
+        languages={languages}
+      />
     );
   }
 }

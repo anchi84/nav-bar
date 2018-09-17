@@ -8,21 +8,51 @@ class Menu extends Component {
         this.itemComponent = [];
         this.state = {
             id: 'hr',
+            hideMenu: false,
             showDropdown: false,
-            width: 0
+            index: 8,
+            itemsWidth: [],
+            menuWidth: 0
         };
     } 
 
     componentDidMount() {
+        console.log("menu componentDidMount");
+        window.addEventListener("resize", this.calculate);
         this.calculate();
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.calculate);
     }
 
     calculate = () => {
-        var width = this.itemComponent
-            .map(item => item.getWidth())
-            .reduce((a, b) => a + b);
-        console.log(width);
-        this.setState({width: width});
+        this.setState({hideMenu: false, index: 8}, 
+            function() {
+                var itemsWidth = this.itemComponent
+                    .map((item) => item.getWidth());
+                var totalWidth = itemsWidth
+                    .reduce((accumulator, currentValue) => accumulator + currentValue);
+                var menuWidth = this.menu.offsetWidth - this.select.offsetWidth;
+                console.log(itemsWidth);
+                console.log(totalWidth);
+                console.log(menuWidth);
+                if(menuWidth - totalWidth < 0) {
+                    var index;
+                    for (let item of itemsWidth) {
+                        // console.log(item);
+                        if(menuWidth - item > 0) {
+                            menuWidth -= item;
+                        } else {
+                            index = itemsWidth.indexOf(item) - 1;
+                            break;
+                        }         
+                    }                    
+                    // console.log("index " +index);
+                    this.setState({hideMenu: true, index: index});
+                }
+            }
+        );    
     }
 
     handleChange = (event) => {
@@ -39,53 +69,58 @@ class Menu extends Component {
     }
 
     render() {
-
+        console.log("menu render")
         const {
-            languages
+            languages,
+            menuItems
         } = this.props;
 
-        // console.log(languages);
-        
+        var menuItemsMap = menuItems[this.state.id]
+            .map((item, index) =>
+                <Item 
+                    key={this.state.id + "_" + index} 
+                    item={item} 
+                    ref={(r) => {this.itemComponent[index] = r}}
+                />
+            );
+
         return (
-            <div>
-                <div className="navBar">
+            <div className="navBar" ref={(r) => {this.menu = r}}>
+                {
+                    menuItemsMap.slice(0, this.state.index)
+                }
+                {
+                    this.state.hideMenu && (
+                        <div
+                            className="dropdown"
+                            onMouseEnter={this.handleMouseEnter} 
+                            onMouseLeave={this.handleMouseLeave}
+                        > 
+                            <span className='item'>...</span>
+                            {
+                                this.state.showDropdown && (  
+                                    menuItemsMap.slice(this.state.index, 8)
+                                )
+                            }
+                        </div>
+                    )
+                }
+                <select 
+                    className="select" 
+                    onChange={this.handleChange} 
+                    ref={(r) => {this.select = r}}
+                >
                     {
-                        this.props.menuItems[this.state.id]
-                            .slice(0,8)
-                            .map((item, index) => 
-                                <Item 
-                                    key={this.state.id + "_" + index} 
-                                    item={item} 
-                                    ref={(r) => {this.itemComponent[index] = r}}
-                                />
+                        Object
+                            .entries(languages)
+                            .map(([id, language]) => 
+                                <option key={id} value={id}>
+                                    {language}
+                                </option>
                             )
                     }
-                   {/*  <div className="dropdown" 
-                        onMouseEnter={this.handleMouseEnter} 
-                        onMouseLeave={this.handleMouseLeave}
-                    >
-                        <span className='item'>...</span>
-                        {
-                            this.state.showDropdown 
-                            && (this.props.menuItems[this.state.id]
-                                .slice(4,8)
-                                .map((item, index) => 
-                                    <Item key={index} item={item}/>)
-                                )
-                        }
-                    </div> */}
-                    <select className="select" onChange={this.handleChange}>
-                        {
-                            Object
-                                .entries(languages)
-                                .map(([id, language]) => 
-                                    (<option key={id} value={id}>{language}</option>)
-                                )
-                        }
-                    </select>
-                </div> 
-            </div>
-            
+                </select>
+            </div> 
         );
     }
 }

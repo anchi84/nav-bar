@@ -1,6 +1,7 @@
 .navBar {
   background-color: white;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
   vertical-align: middle;
@@ -8,6 +9,7 @@
 
 .item {
   height: 4em;
+  width:inherit;
   padding: 10px;
   border: 1px solid black;
   /* flex-grow: 1; */
